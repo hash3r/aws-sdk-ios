@@ -238,6 +238,12 @@ NSString *const AWSS3PresignedURLErrorDomain = @"com.amazonaws.AWSS3PresignedURL
         if ([credentialProvider respondsToSelector:@selector(sessionKey)] && [credentialProvider.sessionKey length] > 0) {
             [canonicalizedAmzHeaders appendFormat:@"%@:%@\n",@"x-amz-security-token",credentialProvider.sessionKey];
         }
+//		workaround for modifing file permissions
+		for (NSString *key in getPreSignedURLRequest.additionalAmzHeaders.allKeys)
+		{
+			[canonicalizedAmzHeaders appendFormat:@"%@:%@\n", key, getPreSignedURLRequest.additionalAmzHeaders[key]];
+		}
+		
         NSString *canonicalizedResource = @"";
         if (nil == keyName || [keyName length] < 1) {
             if (nil == bucketName || [bucketName length] < 1) {

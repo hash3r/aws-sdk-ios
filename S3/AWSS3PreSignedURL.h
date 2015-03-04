@@ -95,5 +95,10 @@ typedef NS_ENUM(NSInteger, AWSS3PresignedURLErrorType) {
  */
 @property (nonatomic, strong) NSString *contentType;
 
+/**
+ * (Optional) Specify file permissions for signed URL. Must be added to request headers too
+ */
+@property (nonatomic, strong) NSDictionary *additionalAmzHeaders;
+
 
 @end
